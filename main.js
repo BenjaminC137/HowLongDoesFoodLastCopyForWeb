@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--\t<app-nav-bar></app-nav-bar>-->\n\n<!--<div class=\"container\">-->\n<app-home></app-home>\n<!--</div>-->\n"
+module.exports = "<app-nav-bar></app-nav-bar>\n<!--<div class=\"container\">-->\n<app-home></app-home>\n<!--</div>-->\n"
 
 /***/ }),
 
@@ -99,12 +99,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _items_items_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./items/items.component */ "./src/app/items/items.component.ts");
 /* harmony import */ var _food_details_food_details_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./food-details/food-details.component */ "./src/app/food-details/food-details.component.ts");
 /* harmony import */ var _item_item_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./item/item.component */ "./src/app/item/item.component.ts");
+/* harmony import */ var _new_item_form_new_item_form_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./new-item-form/new-item-form.component */ "./src/app/new-item-form/new-item-form.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -124,7 +126,8 @@ var AppModule = /** @class */ (function () {
                 _home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"],
                 _items_items_component__WEBPACK_IMPORTED_MODULE_5__["ItemsComponent"],
                 _food_details_food_details_component__WEBPACK_IMPORTED_MODULE_6__["FoodDetailsComponent"],
-                _item_item_component__WEBPACK_IMPORTED_MODULE_7__["ItemComponent"]
+                _item_item_component__WEBPACK_IMPORTED_MODULE_7__["ItemComponent"],
+                _new_item_form_new_item_form_component__WEBPACK_IMPORTED_MODULE_8__["NewItemFormComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"]
@@ -241,7 +244,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-deck\">\n\n<app-item class=\"card rounded-image\" style=\"width: 18rem;\"\n*ngFor=\"let item of homeItems\" [item]=\"item\"></app-item>\n\t</div>\n"
+module.exports = "<div class=\"card-deck\">\n\n<app-item class=\"card rounded-image\" style=\"min-width: 18rem\"\n*ngFor=\"let item of homeItems\" [item]=\"item\"></app-item>\n\t</div>\n"
 
 /***/ }),
 
@@ -274,19 +277,36 @@ var HomeComponent = /** @class */ (function () {
                 id: 1,
                 item: 'chicken',
                 expirationDays: 3,
-                fullImagePath: './assets/chicken.png'
+                fullImagePath: './assets/chicken.png',
+                submissionCount: 1
             },
             {
                 id: 2,
                 item: 'ground beef',
                 expirationDays: 3,
-                fullImagePath: './assets/beef.jpg'
+                fullImagePath: './assets/beef.jpg',
+                submissionCount: 1
             },
             {
-                id: 8,
+                id: 3,
                 item: 'mayonaise',
                 expirationDays: 180,
-                fullImagePath: './assets/mayo.jpg'
+                fullImagePath: './assets/mayo.jpg',
+                submissionCount: 1
+            },
+            {
+                id: 4,
+                item: 'Apples',
+                expirationDays: 90,
+                fullImagePath: './assets/apples.png',
+                submissionCount: 1
+            },
+            {
+                id: 5,
+                item: 'Bread',
+                expirationDays: 5,
+                fullImagePath: './assets/bread.jpg',
+                submissionCount: 1
             }
         ];
     }
@@ -326,7 +346,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img class=\"img-fluid rounded-image\"src=\"{{item.fullImagePath}}\"\nalt=\"{{item.item}}\">\n  <div class=\"card-body img\">\n    <h3 class=\"card-title\">{{item.item}}</h3>\n    <div class=\"card-text\">{{item.item}} ID: {{item.id}} How long does this last in the fridge?</div>\n\t  <br>\n\t   <div class=\"card-text\">\n\t  How long does this last in the fridge?\n\t  </div>\n  </div>\n  <ul class=\"list-group list-group-flush\">\n    <li class=\"list-group-item\">{{item.expirationDays}} days</li>\n    <li class=\"list-group-item\">item ID: {{item.id}}</li>\n    <li class=\"list-group-item\">comments</li>\n  </ul>\n  <div class=\"card-body\">\n    <a href=\"#\" class=\"card-link\">Card link</a>\n  </div>\n"
+module.exports = "<img class=\"img-fluid card-img-top rounded-image\"src=\"{{item.fullImagePath}}\"\nalt=\"{{item.item}}\">\n<h3 class=\"card-title\" style=\"padding-top: 5px; padding-right: 5px\">{{item.item}}</h3>\n<div class=\"card-body\" style=\"padding: 0px;\"></div>\n\n<ul class=\"list-group list-group-flush\">\n\t<li class=\"list-group-item\">\n\t\tHow long does this last in the fridge?\n\t\t<br>\n\t\t<h1>{{item.expirationDays}} days</h1>\n\t</li>\n    <li class=\"list-group-item\">\n\n\n\n  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}comments\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    comments\n  </a>\n\n<div class=\"collapse\" id=\"{{item.id}}comments\">\n  <div class=\"card card-body\">\n    \"I think you can go a few days longer as long as it doesn't smell bad.\" -Johnny Appleseed\n  </div>\n</div>\n\t</li>\n\t<li class=\"list-group-item\">\n\n\t<!--\t<button (click) = \"item.submissionCount = item.submissionCount + 1\" class=\"btn\" style=\"border-radius: 5px\">Vote!</button>-->\n\t<button (click) = \"clickVote()\" class=\"btn\">add vote!</button>\n\n\t</li>\n\t<li class=\"list-group-item\">votes: {{item.submissionCount}}</li>\n</ul>\n<div class=\"card-footer\" style=\"text-align: center\">\n\t  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}vote\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    Vote!\n  </a>\n\t<div class=\"collapse\" id=\"{{item.id}}vote\">\n\t  <div class=\"card card-body\">\n\t\tI think seed\n\t  </div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -356,6 +376,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var ItemComponent = /** @class */ (function () {
     function ItemComponent() {
     }
+    ItemComponent.prototype.clickVote = function () {
+        this.item.submissionCount = this.item.submissionCount + 1;
+    };
     ItemComponent.prototype.ngOnInit = function () {
     };
     __decorate([
@@ -449,7 +472,7 @@ var ItemsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "html{\n    background-color:#ffffff;\n    color: #8C7965;\n    font-family: sans-serif;\n    font-size: 14px;\n\tmargin: 10px;\n}\nh1,h2,h3,h4 {\n        color: #00878F;\n        text-align: right;\n}\nh2{\n    color: #E47128;\n\tpadding: 10px;\n    text-transform: uppercase;\n}\n.carousel-indicators{\n\tmargin-bottom: 0px;\n}\na{\n    text-decoration: none;\n/*    color: #E5AD24;*/\n\tmargin: 1px;\n}\na:hover{\n\tcolor: #00878F;\n\ttext-decoration: none;\n}\n/*\n.container{\n}\n*/\nbody{\n\tbackground-color: none;\n    margin: 10px;\n\tpadding: 15px;\n    font-size: 12px;\n\tcolor: #8C7965;\n    border: 12px hidden;\n    border-radius: 25px;\n    font-family: 'Helvetica Neue', 'Helvetica', 'Open Sans';\n}\nbody p{\n\tbackground-color: rgba(255,255,255, .3);\n\tpadding: 5px;\n\tborder-style: hidden;\n\tborder-radius: 5px;\n\tbox-shadow: 2px 2px 10px rgba(0,0,0, .04);\n\tfont-size: 10px;\n}\n.custom-toggler.navbar-toggler {\n    border-color: #E5AD24 !important;\n}\n.custom-toggler .navbar-toggler-icon {\n  background-image: url(\"data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='#E5AD24' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E\");\n}\n.custom-toggler.navbar-toggler:hover {\n    border-color: #E47128 !important;\n}\n.custom-toggler.navbar-toggler:focus {\n    outline-color: #E5AD24;\n\toutline-width: 3px;\n}\n.navColors {\n\tcolor: #E5AD24;\n\tmargin: 1vw;\n\tbackground-color: rgba(236, 241, 241, .9);\n\t\tborder-radius: 15px;\n\n\nbackground-image: url(data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://ww…p='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E);\n}\n.sticky-nav{\n\tposition: -webkit-sticky;\n\tposition: sticky;\n\ttop: 10px;\n}\n.sticky-top{\n\ttop: 10px;\n}\n.navColors a:hover{\n\tcolor: #E47128 !important; }\n:focus{\n\toutline-color: #E5AD24;\n\t\toutline-width: 3px;\n}\n.removePadding{\n\tpadding: 0;\n}\nfooter{\n\n}\n.top{\n\tposition: fixed;\n\tbottom: 20px;\n\tright: 20px;\n\tborder-style: hidden;\n\tbackground-color: rgb(0, 135, 143);\n\tborder-radius: 22px;\n\tfont-size: 30px;\n\tpadding: 11px;\n\n}\n.top:hover{\n\tcolor: #E47128;\n}\n#topButton{\n\tposition: fixed;\n\tbottom: 5px;\n\tright: 5px;\n}\n.button a:hover:{\n\tcolor: aliceblue;\n}\n.btn-primary {\n\tbackground-color: #00878F;\n\tcolor: #E5AD24;\n\tborder: none;\n}\n.btn{\n\tcolor: #E5AD24;\n\tbackground: none;\n\tfont-size: 20px;\n\tpadding: 0px;\n\tmargin: 0px;\n\tborder: none;\n}\n.btn:hover{\n\tcolor: #E47128\n}\n.btn-primary:focus{\n\toutline-color: #E5AD24;\n\t\toutline-width: 3px;\n}\n.btn-primary:hover, .btn-primary:focus, .btn-primary.active, .open>.dropdown-toggle.btn-primary{\n\tbackground-color: #00878F;\n}\n.btn-primary:active{\n\tbackground-color: #62AEB2;\n}\n.btn-primary:focus{\n\toutline-width: 3px;\n\toutline color: #E5AD24;\n}\n.image-lock{\n\t height: inherit; width: auto;\n\talign-content: center;\n\talign-items:center;\n}\n.rounded-image{\n\tborder-style: hidden;\n\tborder-radius: 20px;\n}\n@include media-breakpoint-up(sm) {\n}\n@include media-breakpoint-up(md) {\n\t.top{\n\n\t}\n}\n@include media-breakpoint-up(lg) {\n}\n@include media-breakpoint-up(xl) {\n}\n@media (min-width: 576px) {\n\t.top{\n\t\tbottom: 10px;\n\t\tright: 10px;\n\t\tborder-radius: 17px;\n\t\tfont-size: 20px;\n\t\tpadding: 7px;\n\t}\n}\n.boxBack{\n\tbackground-color: black;\n}\n"
 
 /***/ }),
 
@@ -460,7 +483,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light rounded-image\">\n  <a class=\"navbar-brand\" href=\"#\">How Long Does Food Last?</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"milk\" placeholder=\"milk\" aria-label=\"milk\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"fixed-top navbar navbar-expand-lg navColors\">\n\t<a class=\"navbar-brand\" routerLink=\"/home\" routerLinkActive=\"active\">\n\t\t\t<img src=\"assets/chicken.png\"width=\"35px\" class=\"d-inline-block align-top\" alt=\"ball\" title=\"ball\"> How Long Does Food Last?</a>\n<!--  <a class=\"navbar-brand\" href=\"#\">How Long Does Food Last?</a>-->\n  <button class=\"navbar-toggler custom-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n\t\t  <button class=\"btn btn-default\">Add food item</button>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"milk\" placeholder=\"milk\" aria-label=\"milk\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -500,6 +523,75 @@ var NavBarComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [])
     ], NavBarComponent);
     return NavBarComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/new-item-form/new-item-form.component.css":
+/*!***********************************************************!*\
+  !*** ./src/app/new-item-form/new-item-form.component.css ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/new-item-form/new-item-form.component.html":
+/*!************************************************************!*\
+  !*** ./src/app/new-item-form/new-item-form.component.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  new-item-form works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/new-item-form/new-item-form.component.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/new-item-form/new-item-form.component.ts ***!
+  \**********************************************************/
+/*! exports provided: NewItemFormComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewItemFormComponent", function() { return NewItemFormComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _food_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../food-properties */ "./src/app/food-properties.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var NewItemFormComponent = /** @class */ (function () {
+    function NewItemFormComponent() {
+    }
+    NewItemFormComponent.prototype.ngOnInit = function () {
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", _food_properties__WEBPACK_IMPORTED_MODULE_1__["FoodProperties"])
+    ], NewItemFormComponent.prototype, "item", void 0);
+    NewItemFormComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-new-item-form',
+            template: __webpack_require__(/*! ./new-item-form.component.html */ "./src/app/new-item-form/new-item-form.component.html"),
+            styles: [__webpack_require__(/*! ./new-item-form.component.css */ "./src/app/new-item-form/new-item-form.component.css")]
+        }),
+        __metadata("design:paramtypes", [])
+    ], NewItemFormComponent);
+    return NewItemFormComponent;
 }());
 
 
