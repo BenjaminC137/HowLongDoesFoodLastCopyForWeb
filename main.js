@@ -277,24 +277,24 @@ var HomeComponent = /** @class */ (function () {
         this.homeItems = [
             {
                 id: 1,
-                item: 'chicken',
+                item: 'Chicken',
                 expirationDays: 3,
                 fullImagePath: './assets/chicken.png',
-                submissionCount: 1
+                submissionCount: 80
             },
             {
                 id: 2,
-                item: 'ground beef',
+                item: 'Ground beef',
                 expirationDays: 7,
                 fullImagePath: './assets/beef.jpg',
                 submissionCount: 1
             },
             {
                 id: 3,
-                item: 'mayonaise',
+                item: 'Mayonaise',
                 expirationDays: 71,
                 fullImagePath: './assets/mayo.jpg',
-                submissionCount: 1
+                submissionCount: 2
             },
             {
                 id: 4,
@@ -309,6 +309,13 @@ var HomeComponent = /** @class */ (function () {
                 expirationDays: 5,
                 fullImagePath: './assets/bread.jpg',
                 submissionCount: 1
+            },
+            {
+                id: 6,
+                item: 'Tomato Sauce',
+                expirationDays: 20,
+                fullImagePath: './assets/tomato-sauce.jpg',
+                submissionCount: 9
             }
         ];
     }
@@ -350,7 +357,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<img class=\"img-fluid card-img-top rounded-image\"src=\"{{item.fullImagePath}}\"\nalt=\"{{item.item}}\">\n<h3 class=\"card-title\" style=\"padding-top: 5px; padding-right: 5px\">{{item.item}}</h3>\n<div class=\"card-body\" style=\"padding: 0px;\"></div>\n\n<ul class=\"list-group list-group-flush\">\n\t<li class=\"list-group-item\">\n\t\tHow long does this last in the fridge?\n\t\t<br>\n\t\t<h1>{{item.expirationDays}} days</h1>\n\t</li>\n    <li class=\"list-group-item\">\n\n\n\n  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}comments\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    comments\n  </a>\n\n<div class=\"collapse\" id=\"{{item.id}}comments\">\n  <div class=\"card card-body\">\n    \"I think you can go a few days longer as long as it doesn't smell bad.\" -Johnny Appleseed\n\t  <br>\n\t  <br>\n\t  \t<button (click) = \"addComment()\" class=\"btn-success\">add comment</button>\n  </div>\n</div>\n\t</li>\n\t<li class=\"list-group-item\">\n\n\t<!--\t<button (click) = \"item.submissionCount = item.submissionCount + 1\" class=\"btn\" style=\"border-radius: 5px\">Vote!</button>-->\n\t<button (click) = \"clickVote()\" class=\"btn\">I agree with {{item.expirationDays}} days!</button>\n\n\t</li>\n\t<li class=\"list-group-item\">votes: {{item.submissionCount}}</li>\n</ul>\n<div class=\"card-footer\" style=\"text-align: center\">\n\t  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}vote\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    Vote!\n  </a>\n\t<div class=\"collapse\" id=\"{{item.id}}vote\">\n\t  <div class=\"card card-body\">\n\t\t  <label>How many days will this last?</label>\n\t\t  <input type=\"text\" placeholder=\"365\"/>\n\t\t<button (click) = \"clickVote()\" class=\"btn-success\">Submit Vote!</button>\n\t\t  \n\t  </div>\n\t</div>\n</div>\n"
+module.exports = "<img class=\"img-fluid card-img-top rounded-image\"src=\"{{item.fullImagePath}}\"\nalt=\"{{item.item}}\">\n<h3 class=\"card-title\" style=\"padding-top: 5px; padding-right: 5px\">{{item.item}}</h3>\n<div class=\"card-body\" style=\"padding: 0px;\"></div>\n\n<ul class=\"list-group list-group-flush\">\n\t<li class=\"list-group-item\">\n\t\tHow long does this last in the fridge?\n\t\t<br>\n\t\t<h1>{{item.expirationDays}} days</h1>\n\t</li>\n    <li class=\"list-group-item\">\n\n\n\n  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}comments\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    comments\n  </a>\n\n<div class=\"collapse\" id=\"{{item.id}}comments\">\n  <div class=\"card card-body\">\n    \"I think you can go a few days longer as long as it doesn't smell bad.\" -Johnny Appleseed\n\t  <br>\n\t  <br>\n\t  \t<button (click) = \"addComment()\" class=\"btn-primary\">Add comment</button>\n  </div>\n</div>\n\t</li>\n\t<li class=\"list-group-item\">\n\n\t<!--\t<button (click) = \"item.submissionCount = item.submissionCount + 1\" class=\"btn\" style=\"border-radius: 5px\">Vote!</button>-->\n\t<button (click) = \"clickVote()\" class=\"btn\">I agree with {{item.expirationDays}} days!</button>\n\n\t</li>\n\t<li class=\"list-group-item\">votes: {{item.submissionCount}}</li>\n</ul>\n<div class=\"card-footer\" style=\"text-align: center\">\n\t  <a class=\"btn btn-primary\" data-toggle=\"collapse\" href=\"#{{item.id}}vote\" role=\"button\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n    Vote!\n  </a>\n\t<div class=\"collapse\" id=\"{{item.id}}vote\">\n\t  <div class=\"card card-body\">\n\t\t  <label>How many days will this last?</label>\n\t\t  <input type=\"text\" placeholder=\"365\"/>\n\t\t<button (click) = \"clickVote()\" class=\"btn-primary\">Submit Vote!</button>\n\t\t  \n\t  </div>\n\t</div>\n</div>\n"
 
 /***/ }),
 
@@ -490,7 +497,7 @@ module.exports = "html{\n    background-color:#ffffff;\n    color: #8C7965;\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"fixed-top navbar navbar-expand-lg navColors\">\n\t<a class=\"navbar-brand\" routerLink=\"/home\" routerLinkActive=\"active\">\n\t\t<img src=\"assets/chicken.png\"width=\"35px\" class=\"d-inline-block align-top\" alt=\"ball\" title=\"ball\"> How Long Does Food Last?</a>\n<!--  <a class=\"navbar-brand\" href=\"#\">How Long Does Food Last?</a>-->\n  <button class=\"navbar-toggler custom-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n\t\t  \n<!--          <a class=\"nav-link\" href=\"#\" (click)=\"tab = 1\">Description</a>-->\n\t\t  <a href=\"#\" (click)=\"toggle()\" id=\"add\" class=\"nav-link\">Add food</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"milk\" placeholder=\"milk\" aria-label=\"milk\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n  <div  *ngIf=\"show\">\n\t<app-new-item-form></app-new-item-form>\n  </div>\n"
+module.exports = "<nav class=\"fixed-top navbar navbar-expand-lg navColors\">\n\t<a class=\"navbar\" style=\"color: #E47128\" routerLink=\"/home\" routerLinkActive=\"active\">\n\t\t<img src=\"assets/chicken.png\"width=\"55px\" class=\"d-inline-block align-top\" alt=\"ball\" title=\"ball\"> How Long Does Food Last?</a>\n<!--  <a class=\"navbar-brand\" href=\"#\">How Long Does Food Last?</a>-->\n  <button class=\"navbar-toggler custom-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item\">\n\t\t  \n<!--          <a class=\"nav-link\" href=\"#\" (click)=\"tab = 1\">Description</a>-->\n\t\t  <a href=\"#\" (click)=\"toggle()\" id=\"add\" class=\"nav-link\">Add food</a>\n      </li>\n    </ul>\n    <form class=\"form-inline my-2 my-lg-0\">\n      <input class=\"form-control mr-sm-2\" type=\"milk\" placeholder=\"milk\" aria-label=\"milk\">\n      <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n    </form>\n  </div>\n</nav>\n  <div  *ngIf=\"show\">\n\t<app-new-item-form></app-new-item-form>\n  </div>\n"
 
 /***/ }),
 
@@ -559,7 +566,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"box\">\n<fieldset>\n<legend>Add Food Item</legend>\n<label>Email: <input type=\"text\" name=\"email\" placeholder=\"benjamin@food.com\"/></label>\n<br>\n<label>Name of Item: <input type=\"text\" name=\"item\" placeholder=\"Milk\"/></label>\n\t<br>\n<label>Estimated number of days until expiration (optional): <input type=\"text\" name=\"days\" optional placeholder=\"14\"/></label>\n\t<br>\n\t<button class=\"btn-danger\">Add</button>\n</fieldset>\n</div>\n"
+module.exports = "<div class=\"box\" style=\"text-align: center; display: inline-block\">\n<fieldset>\n<legend>Add Food Item</legend>\n<label>Email: <br><input type=\"text\" name=\"email\" placeholder=\"benjamin@food.com\"/></label>\n<br>\n<label>Name of Item: <br><input type=\"text\" name=\"item\" placeholder=\"Milk\"/></label>\n\t<br>\n<label>Estimated number of days until expiration (optional): <br><input type=\"text\" name=\"days\" optional placeholder=\"14\"/></label>\n\t<br>\n\t<button class=\"btn-primary\" style=\"border-style: solid; border-color:  white; border-radius: 2px; border-width: thin \">Add</button>\n</fieldset>\n</div>\n"
 
 /***/ }),
 
